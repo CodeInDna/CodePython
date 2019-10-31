@@ -1,41 +1,91 @@
-#-----------------------Rock Paper Scissor Game-------------------------#
-print('***************ROCK*****************')
-print('***************PAPER****************')
-print('*************SCISSORS***************')
-
-######### IMPROVED VERSION ###########
+######### FINAL VERSION ###########
 
 from random import randint	# OR import random
-rand_num = randint(0,2)		# OR random.randint
-if rand_num == 0:
-	computer = 'rock'
-elif rand_num == 1:
-	computer = 'paper'
-else:
-	computer = 'scissors'
+player_wins = 0
+computer_wins = 0
 
-player = input("Player, make your move : ").lower()
-print(f"Computer plays {computer}")
+while player_wins < 2 and computer_wins < 2:
+	print(f"Player Score {player_wins} Computer Score {computer_wins}")
+	#-----------------------Rock Paper Scissor Game-------------------------#
+	print('***************ROCK*****************')
+	print('***************PAPER****************')
+	print('*************SCISSORS***************')
+	rand_num = randint(0,2)		# OR random.randint
+	if rand_num == 0:
+		computer = 'rock'
+	elif rand_num == 1:
+		computer = 'paper'
+	else:
+		computer = 'scissors'
 
-if player == computer:
-	print('It\'s a TIE.')
-elif player == 'rock':
-	if computer == 'scissors':
-		print('Player wins')
+	player = input("Player, make your move : ").lower()
+	print(f"Computer plays {computer}")
+
+	if player == computer:
+		print('It\'s a TIE.')
+	elif player == 'rock':
+		if computer == 'scissors':
+			print('Player wins')
+			player_wins += 1
+		else:
+			print('Computer wins')
+			computer_wins += 1
+	elif player == 'paper':
+		if computer == 'rock':
+			print('Player wins')
+			player_wins += 1
+		else:
+			print('Computer wins')
+			computer_wins += 1
+	elif player == 'scissors':
+		if computer == 'paper':
+			print('Player wins')
+			player_wins += 1
+		else:
+			print('Computer wins')		
+			computer_wins += 1
 	else:
-		print('Computer wins')
-elif player == 'paper':
-	if computer == 'rock':
-		print('Player wins')
-	else:
-		print('Computer wins')
-elif player == 'scissors':
-	if computer == 'paper':
-		print('Player wins')
-	else:
-		print('Computer wins')		
+		print('Invalid input!')
+if player_wins > computer_wins:
+	print("CONGRATS, YOU WON!")
+elif player_wins == computer_wins:
+	print('IT\'S A TIE!')
 else:
-	print('Invalid input!')
+	print("OH NO, :( COMPUTER WON!")
+print(f"FINAL SCORES.....Player Score {player_wins} Computer Score {computer_wins}")
+######### IMPROVED VERSION ###########
+
+# from random import randint	# OR import random
+# rand_num = randint(0,2)		# OR random.randint
+# if rand_num == 0:
+# 	computer = 'rock'
+# elif rand_num == 1:
+# 	computer = 'paper'
+# else:
+# 	computer = 'scissors'
+
+# player = input("Player, make your move : ").lower()
+# print(f"Computer plays {computer}")
+
+# if player == computer:
+# 	print('It\'s a TIE.')
+# elif player == 'rock':
+# 	if computer == 'scissors':
+# 		print('Player wins')
+# 	else:
+# 		print('Computer wins')
+# elif player == 'paper':
+# 	if computer == 'rock':
+# 		print('Player wins')
+# 	else:
+# 		print('Computer wins')
+# elif player == 'scissors':
+# 	if computer == 'paper':
+# 		print('Player wins')
+# 	else:
+# 		print('Computer wins')		
+# else:
+# 	print('Invalid input!')
 
 
 
