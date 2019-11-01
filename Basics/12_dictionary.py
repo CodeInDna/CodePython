@@ -100,3 +100,5 @@ stock_list['cookie'] = 18
 print(stock_list)
 stock_list.pop('cake')
 print(stock_list)
+
+
