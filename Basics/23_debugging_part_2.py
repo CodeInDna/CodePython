@@ -69,10 +69,11 @@ def divide(a,b):
 		print("dont divide by zero please!")
 	except TypeError as err:
 		print("a and b must be int or float")
-		print(err)
+		print(err) 
 	else:
 		print(f"{a} divided by {b} is {result}")
 print(divide(1,2))			#1 divided by 2 is 0.5
 print(divide(1,'a'))#a and b must be int or float, unsupported operand type(s) for /: 'int' and 'str', None
 
 #Debugging with pdb(python debugger)
+
