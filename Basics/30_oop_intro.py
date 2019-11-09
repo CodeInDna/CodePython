@@ -123,7 +123,7 @@ print(t._bar)	#23
 def make_object(name, class_):
 	pass 
 
-# 3. __var: This is also called name mangling—the interpreter changes the name 
+# 3. __var: This is also called name mangling, the interpreter changes the name 
 # of the variable in a way that makes it harder to create collisions when the class 
 # is extended later.
 class Person:
@@ -132,13 +132,13 @@ class Person:
         self._bar = 23
         self.__baz = 23	#name mangling
 t = Test()
-print(dir(t)) # ['_Test__baz', '__class__', '__delattr__', '__dict__', '__dir__'.....]
-# If you look closely you’ll see there’s an attribute called _Test__baz on this object. 
+print(dir(t)) # ['_Person__baz', '__class__', '__delattr__', '__dict__', '__dir__'.....]
+# If you look closely you’ll see there’s an attribute called _Person__baz on this object. 
 # This is the name mangling that the Python interpreter applies. 
 # It does this to protect the variable from getting overridden in subclasses.
 # Let’s create another class that extends the Test class and attempts 
 # to override its existing attributes added in the constructor:
-class ExtendedPerson(Test):
+class ExtendedPerson(Person):
     def __init__(self):
         super().__init__()
         self.foo = 'overridden'
@@ -147,7 +147,7 @@ class ExtendedPerson(Test):
 t2 = ExtendedPerson()
 print(t2.foo) 		#'overridden'
 print(t2._bar)     #'overridden'
-print(t2.__baz)    #AttributeError: "'ExtendedTest' object has no attribute '__baz'"
+print(t2.__baz)    #AttributeError: "'ExtendedPerson' object has no attribute '__baz'"
 
 # __var__: leading and trailing double underscores are reserved for special use in the language. 
 # This rule covers things like __init__ for object constructors, or __call__ to make an object callable.
