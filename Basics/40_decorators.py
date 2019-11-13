@@ -248,3 +248,126 @@ print(repeat_msg("hello", 5))		#prints hello 5 times
 print(repeat_msg("hello", '5'))		#prints hello 5 times
 print(divide("1", '5'))		#0.2
 
+print('*******************************')
+
+# Practice Exercises
+def show_args(fn):
+	def wrapper(*args, **kwargs):
+		print(f"Here are the args: {args}")
+		print(f"Here are the kwargs: {kwargs}")
+		return fn(*args, **kwargs)
+	return wrapper
+
+@show_args
+def random_fn(*args, **kwargs):
+	print("Hi There")
+
+random_fn(1,2,3,a="hi",b="bye")
+
+print('*******************************')
+# double_return
+# Write a fn called double_return which accepts a fn and returns another fn,
+# double_return should decorate a fn by returning two copies of the inner fn's 
+# return value inside of a list
+def double_return(fn):
+	@wraps(fn)
+	def wrapper(*args, **kwargs):
+		result = fn(*args, **kwargs)
+		# return [result, result]
+		return [result for x in range(2)]
+	return wrapper
+
+@double_return
+def greet(name):
+	return f"Hi, I am {name}"
+
+print(greet("Jessica"))
+
+print('*******************************')
+# ensure_fewer_than_three_args
+# Write a fn called ensure_fewer_than_three_args which accepts a fn and returns another fn,
+# The fn passed to it should only be invoked if there are fewer than three positional args
+# passed to it. Otherwise, the inner fn should return "Too many arguments!"
+def ensure_fewer_than_three_args(fn):
+	@wraps(fn)
+	def inner(*args, **kwargs):
+		if len(args) < 3:
+			return fn(*args, **kwargs)
+		return "Too many arguments!"
+	return inner
+
+@ensure_fewer_than_three_args
+def add_all(*nums):
+	return sum(nums)
+
+print(add_all())				#0
+print(add_all(1))				#1
+print(add_all(1,3))				#4
+print(add_all(1,2,3,4,5))		#Too many arguments!
+
+print('*******************************')
+# only_ints
+# Write a fn called only_ints which accepts a fn and returns another fn,
+# The fn passed to it should only be invoked if all the arguments passed to it
+# are integers. Otherwise, the inner fn should return "Please only invoke with integers!"
+def only_ints(fn):
+	@wraps(fn)
+	def inner(*args, **kwargs):
+		if any([arg for arg in args if type(arg) != int]):
+			return "Please only invoke with integers!"
+		return fn(*args, **kwargs)
+	return inner
+
+@only_ints
+def add_ints(a,b):
+	return a+b
+
+print(add_ints(1,2))		#3
+print(add_ints("1","2"))	#Please only invoke with integers!
+
+print('*******************************')
+# ensure_authorized
+# Write a fn called ensure_authorized which accepts a fn and returns another fn,
+# The fn passed to it should only be invoked if there exists a keyword argument with a name
+# of "role" and value of "admin". Otherwise, the inner fn should return "Unauthorized!"
+def ensure_authorized(fn):
+	@wraps(fn)
+	def inner(*args, **kwargs):
+		if kwargs.get("role") == "admin":
+			return fn(*args, **kwargs)
+		return "Unauthorized!"
+	return inner
+
+@ensure_authorized
+def show_secrets(*args,**kwargs):
+	return "Shh! Don't tell anybody!"
+
+print(show_secrets(role="admin"))		#Shh! Don't tell anybody!
+print(show_secrets(role="nobody"))		#Unauthorized!
+
+
+print('*******************************')
+# delay
+# Write a fn called delay which accepts a time and returns an inner fn that accepts a fn,
+# When uses a decorator, delay will wait to execute the fn being decorated by the amount of time passed into it
+# Before starting the timer, delay will also print a message informing a user that there will be a delay
+# before the decorated fn gets run.
+from time import sleep
+def delay(tym):
+	def inner(fn):
+		@wraps(fn)
+		def wrapper(*args, **kwargs):
+			print(f"Waiting {tym} before running {fn.__name__}")
+			sleep(tym)
+			return fn(*args,**kwargs)
+		return wrapper
+	return inner
+
+@delay(3)
+def say_hi():
+	return "Hi!"
+
+print(say_hi())		
+# Waiting 3 before running say_hi
+# It will wait for 3 sec....
+# Hi!
