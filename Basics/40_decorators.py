@@ -3,7 +3,7 @@
 from random import choice
 # Higher Order Functions
 # We can pass funcs as args to other funcs
-def sum(n, func):
+def add1(n, func):
 	total = 0
 	for i in range(n+1):
 		total += func(i)
@@ -12,7 +12,7 @@ def sum(n, func):
 def square(x):
 	return x * x
 
-sum_of_squares = sum(10, square)
+sum_of_squares = add1(10, square)
 print(sum_of_squares)		#385
 
 # We can nest functions inside one another
@@ -159,3 +159,92 @@ print(help(add))
 # Help on function add in module __main__:
 # add(x, y)
 #     Adds two numbers together
+
+print('*******************************')
+# Decorator Examples
+from time import time
+
+def speed_test(func):
+	@wraps(func)
+	def wrapper(*args, **kwargs):
+		start_time = time()
+		result = func(*args, **kwargs)
+		end_time = time()
+		print(f"Executing {func.__name__}")
+		print(f"Time Elapsed: {end_time - start_time}")
+		return result
+	return wrapper
+
+@speed_test
+def sum_nums_gen():
+	return sum(x for x in range(90000000))
+
+@speed_test
+def sum_nums_list():
+	return sum([x for x in range(90000000)])
+
+# print(sum_nums_gen())	#Time Elapsed: 15.305045127868652
+# print(sum_nums_list())	#Memory Error
+
+# Another Example
+def ensure_no_kwargs(fn):
+	@wraps(fn)
+	def wrapper(*args, **kwargs):
+		if kwargs:
+			raise ValueError("No kwargs allowed!")
+		return fn(*args, **kwargs)
+	return wrapper
+
+@ensure_no_kwargs
+def greet(name):
+	print(f"hi there {name}")
+
+print(greet("Michelin"))		# hi there Michelin 
+# print(greet(name = "Michelin"))	# ValueError: No kwargs allowed!
+
+print('*******************************')
+# Decrator with Arguments
+def ensure_first_arg_is(val):
+	def inner(fn):
+		@wraps(fn)
+		def wrapper(*args, **kwargs):
+			if args and args[0] != val:
+				return f"First args needs to be {val}"
+			return fn(*args, **kwargs)
+		return wrapper
+	return inner
+
+
+
+@ensure_first_arg_is("burrito")
+def fav_foods(*foods):
+	print(foods)
+
+print(fav_foods("burrito", "ice cream"))	#("burrito", "ice cream")
+# fav_foods = ensure_first_arg_is("burrito")(fav_foods)
+print(fav_foods("ice cream", "burrito"))	#First args needs to be burrito
+
+print('*******************************')
+def enforce(*types):
+	def decorator(fn):
+		def new_func(*args, **kwargs):
+			new_args = []
+			for (a,t) in zip(args, types):
+				new_args.append(t(a))
+			return fn(*new_args, **kwargs)
+		return new_func
+	return decorator 
+
+@enforce(str, int)
+def repeat_msg(msg, times):
+	for time in range(times):
+		print(msg)
+
+@enforce(float, float)
+def divide(a,b):
+	print(a/b)
+
+print(repeat_msg("hello", 5))		#prints hello 5 times
+print(repeat_msg("hello", '5'))		#prints hello 5 times
+print(divide("1", '5'))		#0.2
+
