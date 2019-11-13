@@ -311,7 +311,6 @@ print(sum([n for n in range(10000000)]))
 list_total_time = time.time() - list_start_time
 
 print(gen_total_time)	# 1.545854091644287
-print(list_total_time)	# 1.674522876739502
-
+print(list_total_time)	# 1.674522876739502 
 
 
