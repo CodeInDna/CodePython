@@ -61,15 +61,15 @@ class Deck:
 	def deal_hand(self, hand_size):
 		return self._deal(hand_size)
 
-deck1 = Deck()
-# print(deck1)			#Deck of 52 cards
-# print(deck1._deal(2))	#[Q of Clubs, K of Clubs]
-# print(deck1)			#Deck of 50 cards
-# print(deck1._deal(51))	#[A of Hearts, 2 of Hearts.....]
-# print(deck1)			#Deck of 0 cards
-# print(deck1._deal(1))	#ValueError: All cards have been dealt!
-deck1.shuffle()
-card1 = deck1.deal_card()
-print(card1)
-hand1 = deck1.deal_hand(5)
-print(hand1)
+# deck1 = Deck()
+# # print(deck1)			#Deck of 52 cards
+# # print(deck1._deal(2))	#[Q of Clubs, K of Clubs]
+# # print(deck1)			#Deck of 50 cards
+# # print(deck1._deal(51))	#[A of Hearts, 2 of Hearts.....]
+# # print(deck1)			#Deck of 0 cards
+# # print(deck1._deal(1))	#ValueError: All cards have been dealt!
+# deck1.shuffle()
+# card1 = deck1.deal_card()
+# print(card1)
+# hand1 = deck1.deal_hand(5)
+# print(hand1)
