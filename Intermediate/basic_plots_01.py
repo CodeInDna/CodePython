@@ -8,7 +8,7 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
-from world_development import gdp_cap, life_exp, pop, col
+from dataset.world_development import gdp_cap, life_exp, pop, col
 
 # plot the line graph
 # plt.plot(gdp_cap, life_exp)

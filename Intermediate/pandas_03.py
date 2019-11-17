@@ -82,7 +82,7 @@ print(cars)
 # as files with a regular structure. One of those file types is the 
 # CSV file, which is short for "comma-separated values".
 
-cars = pd.read_csv('cars.csv')
+cars = pd.read_csv('dataset/cars.csv')
 print(cars)
 #   Unnamed: 0  cars_per_cap        country  drives_right
 # 0         US           809  United States          True
@@ -100,7 +100,7 @@ print(cars)
 # specify which column in the CSV file should be used as a row label?
 
 # Fix import by including index_col
-cars = pd.read_csv('cars.csv', index_col= 0)
+cars = pd.read_csv('dataset/cars.csv', index_col= 0)
 
 # Print out cars
 print(cars)
