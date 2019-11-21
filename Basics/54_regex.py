@@ -139,3 +139,23 @@ match1 = pat.search("johndoe@yYahoo.com")
 print(match.group())	# johndoe@yahoo.com
 print(match.groups())	# ('johndoe', 'yahoo', 'com')
 print(match1.groups())	# ('johndoe', 'yYahoo', 'com')
+
+
+# Regex Substitution Basics
+text = "Last Evening Mrs. Daisy and Mr. White went to Disney land with Ms. Clark"
+# patt = re.compile(r"(Mr.|Mrs.|Ms.) [a-z]+", re.IGNORECASE))
+patt = re.compile(r"(Mr.|Mrs.|Ms.) ([a-z])[a-z]+", re.IGNORECASE)
+# result = patt.sub("REDACTED", text)	# Last Evening REDACTED and REDACTED went to Disney land with REDACTED
+result = patt.sub("\g<1> \g<2>", text)	
+print(result)	# Last Evening Mrs. D and Mr. W went to Disney land with Ms. C
+
+
+# censor fn : accepts a string. censor any word starts with frack. This includes frack, fracker, fracking etc. Replace the entire word with "CENSORED"
+# your regex should be insensitive
+def censor(str):
+	pattern = re.compile(r"\bfrack\w*\b", re.I)
+	match = pattern.sub("CENSORED", str)
+	print(match)
+censor("frack you!")				# CENSORED you!
+censor("I hope you fracking die!")	# I hope you CENSORED die!
+censor("you fracking frack")		# you CENSORED CENSORED
