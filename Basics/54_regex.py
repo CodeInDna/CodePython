@@ -123,3 +123,19 @@ def parse_date(string):
 			'y': matches.group(3)
 		}
 print(parse_date("12,04,2001"))	# {'d': '12', 'm': '04', 'y': '2001'}
+
+# Compilation Flags
+# re.VERBOSE helps us to add comments and use regex in multiple lines
+# re.IGNORECASE ignores the case
+pat = re.compile(r"""
+	^([a-z0-9_\.-]+) 	# first part of email
+	@ 					# single @ sign
+	([0-9a-z\.-]+) 		# email provider
+	\. 					# single period
+	([a-z\.]{2,6})$ 	# com, org, net, etc.
+	""", re.VERBOSE | re.IGNORECASE)
+match = pat.search("johndoe@yahoo.com")
+match1 = pat.search("johndoe@yYahoo.com")
+print(match.group())	# johndoe@yahoo.com
+print(match.groups())	# ('johndoe', 'yahoo', 'com')
+print(match1.groups())	# ('johndoe', 'yYahoo', 'com')
