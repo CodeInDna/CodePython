@@ -41,7 +41,16 @@ people = people = [
 	("Henry", "Hudson", 7),
 	("Neil","Armstrong", 7),
 	("Daniel", "Boone", 3)]
+# insert them altogether
+# c.executemany("INSERT INTO friends VALUES(?, ?, ?)", people)
 
+# insert by iterating
+average = 0
+for person in people:
+	# c.execute("INSERT INTO friends VALUES(?, ?, ?)", person)
+	# print("INSERTING DATA")
+	average += person[2]
+print(average/len(people))
 
 # commit changes
 conn.commit()
