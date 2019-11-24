@@ -35,7 +35,7 @@ with open('dataset/moby_dick.txt') as file:
 # What are flat files?
 # Flat file are the files which has attributes and records(rows)
 # csv or txt files (tab seperated data) are flat files as they contain
-# sueful data
+# useful data
 
 # Importing flat files using Numpy**********************************
 # Why Numpy?
