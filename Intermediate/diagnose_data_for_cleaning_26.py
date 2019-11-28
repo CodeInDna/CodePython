@@ -15,16 +15,16 @@ import pandas as pd
 df = pd.read_csv('dataset/dob_job_application_filings_subset.csv')
 
 # Print the head of df
-# print(df.head())
+print(df.head())
 
 # Print the tail of df
-# print(df.tail())
+print(df.tail())
 
 # Print the shape of df
-# print(df.shape)			# (12846, 82)
+print(df.shape)			# (12846, 82)
 
 # Print the columns of df
-# print(df.columns)
+print(df.columns)
 
 print(df['Street Frontage'])	# This column has 0 values, perhaps the data is missing
 
@@ -66,13 +66,13 @@ print(df.describe())
 # to False so if there are missing values in a column, it will give you the 
 # frequency counts.
 # Print the value counts for 'Borough'
-# print(df['Borough'].value_counts(dropna=False))
-
+print(df['Borough'].value_counts(dropna=False))
+# 
 # Print the value_counts for 'State'
-# print(df.State.value_counts(dropna=False))
+print(df.State.value_counts(dropna=False))
 
 # Print the value counts for 'Site Fill'
-# print(df['Site Fill'].value_counts(dropna=False))
+print(df['Site Fill'].value_counts(dropna=False))
 # Notice: how not all values in the 'State' column are NY. This is an 
 # interesting find, as this data is supposed to consist of applications 
 # filed in NYC. Curiously, all the 'Borough' values are correct. A good 
@@ -100,13 +100,13 @@ print(df.describe())
 import matplotlib.pyplot as plt
 
 # Describe the column
-# print(df['Existing Zoning Sqft'].describe())
+print(df['Existing Zoning Sqft'].describe())
 
 # Plot the histogram
-# df['Existing Zoning Sqft'].plot(kind='hist', rot=70, logx=True, logy=True)
+df['Existing Zoning Sqft'].plot(kind='hist', rot=70, logx=True, logy=True)
 
 # Display the histogram
-# plt.show()
+plt.show()
 # Notice: You expected a large amount of counts on the left side of the plot 
 # because the 25th, 50th, and 75th percentiles have a value of 0. The 
 # plot shows us that there are barely any counts near the max value, 
@@ -142,8 +142,8 @@ df.plot(kind='scatter', x='initial_cost', y='total_est_fee', rot=70)
 plt.show()
 
 # Create and display the second scatter plot
-# df_subset.plot(kind='scatter', x='initial_cost', y='total_est_fee', rot=70)
-# plt.show()
+df_subset.plot(kind='scatter', x='initial_cost', y='total_est_fee', rot=70)
+plt.show()
 
 # Notice: In general, from the second plot it seems like there is a strong 
 # correlation between 'initial_cost' and 'total_est_fee'. In addition, 
@@ -152,7 +152,3 @@ plt.show()
 # because it is dominated by the outliers.
 
 
-# $$$$$$$$$$$ Tidy Data $$$$$$$$$$$ 
-# * Colums represent separate variables
-# * Rows represent individual observations
-# * Observational units form tables
