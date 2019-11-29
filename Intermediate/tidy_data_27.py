@@ -124,13 +124,13 @@ print(airquality_pivot_reset.head())
 # columns of the pivoted DataFrame using .reset_index().
 import numpy as np
 
-# airquality_dup = pd.read_csv('dataset/airquality_dup.csv')
+airquality_dup = pd.read_csv('dataset/airquality_dup.csv')
 
 # print(airquality.shape)	# (153, 6)
 # print(airquality_dup.shape)	# (165, 6)	Duplicate rows present
 
 # Pivot table the airquality_dup: airquality_pivot
-# airquality_pivot = airquality_dup.pivot_table(index=['Month','Day'], columns='measurement', values='reading', aggfunc=np.mean)
+airquality_pivot = airquality_dup.pivot_table(index=['Month','Day'], columns='measurement', values='reading', aggfunc=np.mean)
 
 # Print the head of airquality_pivot before reset_index
 print(airquality_pivot.head())
