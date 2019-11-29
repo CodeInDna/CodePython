@@ -191,8 +191,35 @@ print(airquality.info())
 # statement is true: This is how you can confirm that the data you are checking 
 # are valid.The first .all() method will return a True or False for each column, 
 # while the second .all() method will return a single True or False.
+ebola = pd.read_csv('dataset/ebola.csv')
 # Assert that there are no missing values
-assert pd.notnull(ebola).all().all()
+# assert pd.notnull(ebola).all().all()
 
 # Assert that all values are >= 0
-assert (ebola >= 0).all().all()
+# assert (ebola >= 0).all().all()
+
+
+# $$$$$$$$$$$$ Exploratory analysis $$$$$$$$$$$ #
+# Here, the goal is to visually check the data for insights as well as errors. 
+# When looking at the plot, pay attention to whether the scatter plot takes 
+# the form of a diagonal line, and which points fall below or above the 
+# diagonal line. This will inform how life expectancy in 1899 changed (or did 
+# 	not change) compared to 1800 for different countries. If points fall on a 
+# diagonal line, it means that life expectancy remained the same!
+g1800s = pd.read_csv('dataset/g1800s.csv')
+# Import matplotlib.pyplot
+import matplotlib.pyplot as plt
+
+# Create the scatter plot
+g1800s.plot(kind='scatter', x='1800', y='1899')
+
+# Specify axis labels
+plt.xlabel('Life Expectancy by Country in 1800')
+plt.ylabel('Life Expectancy by Country in 1899')
+
+# Specify axis limits
+plt.xlim(20, 55)
+plt.ylim(20, 55)
+
+# Display the plot
+plt.show()
